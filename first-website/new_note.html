@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mermaid Sequence Diagram</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+</head>
+<body>
+  <h1>Sequence Diagram</h1>
+  <div class="mermaid">
+    sequenceDiagram
+      participant browser
+      participant server
+
+      browser->>server: GET newNoteDiagram.html
+      server-->>browser: HTML document
+      browser->>server: GET ./styles/newNoteDiagram.css
+      server-->>browser: the CSS file
+      browser->>server: GET ./new_note.html
+      server-->>browser: HTML document
+      browser->>server: GET https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js      
+      browser->>browser: The browser initialize the mermaid
+  </div>
+</body>
+</html>

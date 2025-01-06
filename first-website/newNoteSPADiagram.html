@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mermaid Sequence Diagram</title>
+    <link rel="stylesheet" type="text/css" href="./styles/newNoteDiagram.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        window.onload = function (e){
+            mermaid.initialize({ startOnLoad: false });
+
+            const mermaidDiagram = 
+            `sequenceDiagram
+              participant browser
+              participant server
+
+              browser->>server: GET newNoteSPADiagram.html
+              server-->>browser: HTML document
+              browser->>server: GET ./styles/newNoteDiagram.css
+              server-->>browser: the CSS file
+              browser->>server: GET https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js      
+              browser->>browser: The browser initialize the mermaid`;
+
+            const saveButton = document.getElementById("notes_form");
+            saveButton.onsubmit = function (e) {
+                e.preventDefault()
+                const container = document.getElementById("notes");
+
+                container.innerHTML = "";
+
+                const diagramDiv = document.createElement("div");
+                diagramDiv.className = "mermaid";
+                diagramDiv.textContent = mermaidDiagram;
+                container.appendChild(diagramDiv);
+
+                mermaid.contentLoaded();
+            };
+        }
+    </script>
+</head>
+
+<body>
+    <div class='container'>
+        <h1>Notes -- single page app</h1>
+        <div id='notes'>
+        </div>
+        <form id='notes_form'>
+            <input type="text" name="note"><br>
+            <input type="submit" value="Save">
+        </form>
+    </div>
+</body>
+
+</html>
